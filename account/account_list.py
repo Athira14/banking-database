@@ -1,18 +1,15 @@
 import MySQLdb   
-
-db = MySQLdb.connect(host="localhost", user="root",passwd="athira", 
+db = MySQLdb.connect(host="localhost", user="root", passwd="athira", 
 db="bank") 
 cursor = db.cursor()
-#from account_details import aacc
-cursor.execute("select * from account group by no")
+cursor.execute("select a.name, a.age, a.address, a.account_no, b.account_type, a.amount from account a, account_types b where a.acc_typeid = b.acc_typeid")
 db.commit()
 for row in cursor.fetchall():
-	#print row
-	no=row[0]
-	name=row[1]
-	age=row[2]
-	add=row[3]
-	acc=row[4]
-	acct=row[5]
-	amt=row[6]
-	print "no:%d,name:%s,age:%d,address:%s,account_no:%d,account_type:%s,amount_deposit:%d"%(no,name,age,add,acc,acct,amt)
+	name = row[0]
+	age = row[1]
+	add = row[2]
+	acc = row[3]
+	acct = row[4]
+	amt = row[5]
+	print "name:%s, age:%d, address:%s, account_no:%d, account_type:%s, amount_deposit:%d"%(name, age, add, acc, acct, amt)
+cursor.close()
