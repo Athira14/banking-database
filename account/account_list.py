@@ -1,14 +1,12 @@
 #To display the account details of every customers
 import MySQLdb   
 
-db = MySQLdb.connect(
-	    host="localhost", user="root", passwd="athira", db="bank"
-) 
+db = MySQLdb.connect(host="localhost", user="root", passwd="athira", db="bank") 
 cursor = db.cursor()
 #selecting the details from table account and account_types
 cursor.execute(
 	"select a.name, a.age, a.address, a.account_no, b.account_type, \
-    a.amount from account a, account_types b where a.acc_typeid = b.acc_typeid"
+     a.amount from account a inner join account_types b on a.acc_typeid = b.acc_typeid"
 )
 
 db.commit()
